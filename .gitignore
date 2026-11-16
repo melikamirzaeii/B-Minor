@@ -1,0 +1,10 @@
+build/
+cmake-build-*/
+*.o
+*.obj
+*.exe
+bminor_cc
+bminor_tests
+*.html
+.vscode/
+.DS_Store

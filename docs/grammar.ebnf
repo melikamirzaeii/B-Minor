@@ -1,0 +1,56 @@
+Program         ::= Declaration* EOF ;
+
+Declaration     ::= IDENT ":" Type ( ";" | "=" ( BlockStmt | Initializer ";" ) ) ;
+
+Type            ::= "integer"
+                  | "boolean"
+                  | "char"
+                  | "string"
+                  | "void"
+                  | "auto"
+                  | "array" "[" Expression? "]" Type
+                  | "function" Type "(" ParamList? ")" ;
+
+ParamList       ::= Param ( "," Param )* ;
+Param           ::= IDENT ":" Type ;
+
+Statement       ::= Declaration
+                  | BlockStmt
+                  | IfStmt
+                  | ForStmt
+                  | WhileStmt
+                  | ReturnStmt
+                  | PrintStmt
+                  | ExprStmt ;
+
+BlockStmt       ::= "{" Statement* "}" ;
+IfStmt          ::= "if" "(" Expression ")" Statement ( "else" Statement )? ;
+ForStmt         ::= "for" "(" Expression? ";" Expression? ";" Expression? ")" Statement ;
+WhileStmt       ::= "while" "(" Expression ")" Statement ;
+ReturnStmt      ::= "return" Expression? ";" ;
+PrintStmt       ::= "print" ( Expression ( "," Expression )* )? ";" ;
+ExprStmt        ::= Expression ";" ;
+
+Initializer     ::= "{" ( Initializer ( "," Initializer )* )? "}"
+                  | Expression ;
+
+Expression      ::= Assignment ;
+Assignment      ::= LogicalOr ( "=" Assignment )? ;
+LogicalOr       ::= LogicalAnd ( "||" LogicalAnd )* ;
+LogicalAnd      ::= Equality ( "&&" Equality )* ;
+Equality        ::= Relational ( ( "==" | "!=" ) Relational )* ;
+Relational      ::= Additive ( ( "<" | "<=" | ">" | ">=" ) Additive )* ;
+Additive        ::= Multiplicative ( ( "+" | "-" ) Multiplicative )* ;
+Multiplicative  ::= Exponentiation ( ( "*" | "/" | "%" ) Exponentiation )* ;
+Exponentiation  ::= Unary ( "^" Exponentiation )? ;
+Unary           ::= ( "-" | "!" ) Unary | Postfix ;
+Postfix         ::= Primary ( "++" | "--" | "[" Expression "]" | "(" ArgList? ")" )* ;
+ArgList         ::= Expression ( "," Expression )* ;
+
+Primary         ::= INT_LITERAL
+                  | "true"
+                  | "false"
+                  | CHAR_LITERAL
+                  | STRING_LITERAL
+                  | IDENT
+                  | "(" Expression ")" ;

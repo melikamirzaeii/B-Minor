@@ -1,0 +1,18 @@
+factorial: function integer ( n: integer ) = {
+    if (n <= 1) {
+        return 1;
+    } else {
+        return n * factorial(n - 1);
+    }
+}
+
+main: function integer () = {
+    arr: array [5] integer = {1, 2, 3, 4, 5};
+    i: integer = 0;
+    msg: string = "Factorial result:\t";
+
+    for (i = 0; i < 5; i++) {
+        print msg, arr[i], " -> ", factorial(arr[i]), '\n';
+    }
+    return 0;
+}

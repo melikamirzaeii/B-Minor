@@ -1,0 +1,7 @@
+broken: function integer ( x: integer ) = {
+    bad_char: integer = 10 @ 20;
+    bad_str: string = "unterminated string literal
+    missing_semi: integer = 42
+    valid_after_recovery: boolean = true && !false;
+    return 0;
+}
